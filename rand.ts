@@ -50,3 +50,11 @@ const intRandomsNoRepeat = (min: number, max: number, piece: number): number[] |
   }
   return rands;
 }
+
+export {
+  intRandom,
+  intRandoms,
+  intRandomsNoRepeat,
+  replacement,
+  randomChoice
+};

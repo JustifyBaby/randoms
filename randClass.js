@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Random = void 0;
 var Random = /** @class */ (function () {
     function Random() {
     }
@@ -32,7 +35,7 @@ var Random = /** @class */ (function () {
     };
     Random.prototype.intRandoms = function (min, max, piece) {
         var rands = [];
-        for (var i_1 = 0; i_1 < piece; i_1++) {
+        for (var i = 0; i < piece; i++) {
             rands.push(this.intRandom(min, max));
         }
         return rands;
@@ -49,12 +52,10 @@ var Random = /** @class */ (function () {
             }
             else {
                 rands.push(rand);
-                console.log(rands.length);
             }
         }
         return rands;
     };
     return Random;
 }());
-var i = new Random();
-console.log(i.intRandomsNoRepeat(1, 5, 4));
+exports.Random = Random;
