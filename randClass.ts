@@ -1,18 +1,19 @@
 export class Random {
-  constructor() { };
+  constructor() { }
+
   intRandom(min: number, max: number): number {
     return Math.floor(Math.random() * (max + 1 - min) + min);
   }
 
-  randomChoice(array: any[]): any {
+  randomChoice<T>(array: T[]): T {
     const rand: number = Math.floor(Math.random() * array.length);
     return array[rand];
   }
 
-  replacement(...prevList: any[]): any[] {
+  replacement<U>(...prevList: U[]): U[] {
     // result container
-    const afterList: any[] = [];
-    let after: number;
+    const afterList: U[] = [];
+    let after: U;
 
     while (prevList.length !== afterList.length) {
       after = this.randomChoice(prevList);
@@ -26,6 +27,7 @@ export class Random {
     }
     return afterList;
   }
+
   intRandoms(min: number, max: number, piece: number): number[] {
     let rands: number[] = [];
     for (let i = 0; i < piece; i++) {

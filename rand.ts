@@ -2,15 +2,15 @@
 const intRandom =
   (min: number, max: number): number => Math.floor(Math.random() * (max + 1 - min) + min);
 
-const randomChoice = (array: any[]): any => {
+const randomChoice = <T>(array: T[]): T => {
   const rand: number = Math.floor(Math.random() * array.length);
   return array[rand];
 }
 
 // random changing
-const replacement = (...prevList: any[]): any[] => {
+const replacement = <U>(...prevList: U[]): U[] => {
   // result container
-  const afterList: any[] = [];
+  const afterList: U[] = [];
   let random: number;
 
   while (prevList.length !== afterList.length) {
