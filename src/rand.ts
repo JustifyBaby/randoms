@@ -5,7 +5,7 @@ const intRandom =
 const randomChoice = <T>(array: T[]): T => {
   const rand: number = Math.floor(Math.random() * array.length);
   return array[rand];
-}
+};
 
 // random changing
 const replacement = <U>(...prevList: U[]): U[] => {
@@ -25,15 +25,15 @@ const replacement = <U>(...prevList: U[]): U[] => {
   }
 
   return afterList;
-}
+};
 
 const intRandoms = (min: number, max: number, piece: number): number[] => {
   let rands: number[] = [];
-  for (let i = 0; i < piece; i++) {
+  for (let times = 0; times < piece; times++) {
     rands.push(intRandom(min, max));
   }
   return rands;
-}
+};
 
 const intRandomsNoRepeat = (min: number, max: number, piece: number): number[] | never => {
   if ((max - min) < piece) {
@@ -49,12 +49,29 @@ const intRandomsNoRepeat = (min: number, max: number, piece: number): number[] |
     }
   }
   return rands;
-}
+};
+
+const randomString = (letterPiece: number) => {
+  const alphabetsAndNumsAndSymbols: string[] = [
+    ..."abcdefghijklmnopqrstuvwxyz",
+    ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    ..."1234567890",
+    ..."!#$%&'()=~|-^+*;:{}[]?<>,._"
+  ];
+
+  let text: string = "";
+  for (let i = 0; i < letterPiece; i++) {
+    text += randomChoice(alphabetsAndNumsAndSymbols);
+  }
+
+  return text;
+};
 
 export {
   intRandom,
   intRandoms,
   intRandomsNoRepeat,
   replacement,
-  randomChoice
+  randomChoice,
+  randomString
 };

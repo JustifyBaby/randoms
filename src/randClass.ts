@@ -1,7 +1,7 @@
 export class Random {
   constructor() { }
 
-  intRandom(min: number, max: number): number {
+  rangeRandom(min: number, max: number): number {
     return Math.floor(Math.random() * (max + 1 - min) + min);
   }
 
@@ -28,21 +28,21 @@ export class Random {
     return afterList;
   }
 
-  intRandoms(min: number, max: number, piece: number): number[] {
+  rangeRandoms(min: number, max: number, piece: number): number[] {
     let rands: number[] = [];
-    for (let i = 0; i < piece; i++) {
-      rands.push(this.intRandom(min, max));
+    for (let times = 0; times < piece; times++) {
+      rands.push(this.rangeRandom(min, max));
     }
     return rands;
   }
 
-  intRandomsNoRepeat(min: number, max: number, piece: number): number[] | never {
+  rangeRandomsNoRepeat(min: number, max: number, piece: number): number[] | never {
     if ((max - min) < piece) {
       throw new Error("Value Error! max-min < piece => I must be repeat!!");
     }
     const rands: number[] = [];
     while (rands.length !== piece) {
-      let rand = this.intRandom(min, max);
+      let rand = this.rangeRandom(min, max);
       if (rands.includes(rand)) {
         continue;
       } else {
@@ -50,5 +50,21 @@ export class Random {
       }
     }
     return rands;
+  }
+
+  randomString(letterPiece: number): string {
+    const alphabetsAndNumsAndSymbols: string[] = [
+      ..."abcdefghijklmnopqrstuvwxyz",
+      ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      ..."1234567890",
+      ..."!#$%&'()=~|-^+*;:{}[]?<>,._"
+    ];
+
+    let text: string = "";
+    for (let i = 0; i < letterPiece; i++) {
+      text += this.randomChoice(alphabetsAndNumsAndSymbols);
+    }
+
+    return text;
   }
 }
