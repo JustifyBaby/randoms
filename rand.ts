@@ -1,5 +1,5 @@
 // Random num from "min" to "max".
-const intRandom =
+const rangeRandom =
   (min: number, max: number): number => Math.floor(Math.random() * (max + 1 - min) + min);
 
 const randomChoice = <T>(array: T[]): T => {
@@ -27,21 +27,21 @@ const replacement = <U>(...prevList: U[]): U[] => {
   return afterList;
 };
 
-const intRandoms = (min: number, max: number, piece: number): number[] => {
+const rangeRandoms = (min: number, max: number, piece: number): number[] => {
   let rands: number[] = [];
   for (let times = 0; times < piece; times++) {
-    rands.push(intRandom(min, max));
+    rands.push(rangeRandom(min, max));
   }
   return rands;
 };
 
-const intRandomsNoRepeat = (min: number, max: number, piece: number): number[] | never => {
+const rangeRandomsNoRepeat = (min: number, max: number, piece: number): number[] | never => {
   if ((max - min) < piece) {
     throw new Error("Value Error! max-min < piece => I must be repeat!!");
   }
   const rands: number[] = [];
   while (rands.length !== piece) {
-    let rand = intRandom(min, max);
+    let rand = rangeRandom(min, max);
     if (rands.includes(rand)) {
       continue;
     } else {
@@ -68,9 +68,9 @@ const randomString = (letterPiece: number) => {
 };
 
 module.exports = {
-  intRandom,
-  intRandoms,
-  intRandomsNoRepeat,
+  rangeRandom,
+  rangeRandoms,
+  rangeRandomsNoRepeat,
   replacement,
   randomChoice,
   randomString
