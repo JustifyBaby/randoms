@@ -1,4 +1,4 @@
-export class Random {
+class Random {
     constructor() { }
     rangeRandom(min, max) {
         return Math.floor(Math.random() * (max + 1 - min) + min);
@@ -61,3 +61,5 @@ export class Random {
         return text;
     }
 }
+
+module.exports = Random;

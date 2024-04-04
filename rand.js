@@ -58,4 +58,12 @@ const randomString = (letterPiece) => {
     }
     return text;
 };
-export { intRandom, intRandoms, intRandomsNoRepeat, replacement, randomChoice, randomString };
+
+module.exports = {
+    intRandom,
+    intRandoms,
+    intRandomsNoRepeat,
+    replacement,
+    randomChoice,
+    randomString
+};

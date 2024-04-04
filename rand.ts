@@ -67,7 +67,7 @@ const randomString = (letterPiece: number) => {
   return text;
 };
 
-export {
+module.exports = {
   intRandom,
   intRandoms,
   intRandomsNoRepeat,
