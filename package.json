@@ -2,7 +2,7 @@
   "name": "my-original-random",
   "version": "2.0.0",
   "description": "",
-  "main": "./src/rand.js",
+  "main": "./rand.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
