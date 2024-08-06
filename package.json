@@ -1,7 +1,7 @@
 {
-  "name": "my-original-random",
-  "version": "2.2.1",
-  "description": "",
+  "name": "random-lib",
+  "version": "2.2.2",
+  "description": "random-lib is useful.",
   "main": "rand",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

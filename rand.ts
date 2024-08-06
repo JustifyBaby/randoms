@@ -1,77 +1,71 @@
-// Random num from "min" to "max".
-const rangeRandom =
-  (min: number, max: number): number => Math.floor(Math.random() * (max + 1 - min) + min);
+class Random {
+  static integer(min: number, max: number): number {
+    return Math.floor(Math.random() * max + 1 - min) + min;
+  }
 
-const randomChoice = <T>(array: T[]): T => {
-  const rand: number = Math.floor(Math.random() * array.length);
-  return array[rand];
-};
+  static choice<T>(array: T[]): T {
+    return array[this.integer(0, array.length)];
+  }
 
-// random changing
-const replacement = <U>(...prevList: U[]): U[] => {
-  // result container
-  const afterList: U[] = [];
-  let random: number;
+  static string(length: number) {
+    const alphabets = [..."abcdefghijklmnopqrstuvwxyz"];
+    const chars = [
+      ...alphabets,
+      ...alphabets.map((char) => char.toUpperCase()),
+      ..."0123456789",
+    ];
 
-  while (prevList.length !== afterList.length) {
-    random = Math.floor(Math.random() * prevList.length);
-    if (afterList.includes(prevList[random])) {
-      // if include skip --> don't do anything, and go to head.
-      continue;
-    } else {
-      // if passed add.
-      afterList.push(prevList[random]);
+    let text: string = "";
+    for (let i = 0; i < length; i++) {
+      text += this.choice<string>(chars);
     }
+
+    return text;
   }
 
-  return afterList;
-};
+  static shuffle<U>(prevList: U[]): U[] {
+    // result container
+    let afterList: U[] = [];
 
-const rangeRandoms = (min: number, max: number, piece: number): number[] => {
-  let rands: number[] = [];
-  for (let times = 0; times < piece; times++) {
-    rands.push(rangeRandom(min, max));
-  }
-  return rands;
-};
-
-const rangeRandomsNoRepeat = (min: number, max: number, piece: number): number[] | never => {
-  if ((max - min) < piece) {
-    throw new Error("Value Error! max-min < piece => I must be repeat!!");
-  }
-  const rands: number[] = [];
-  while (rands.length !== piece) {
-    let rand = rangeRandom(min, max);
-    if (rands.includes(rand)) {
-      continue;
-    } else {
-      rands.push(rand);
+    while (prevList.length !== afterList.length) {
+      const choose = this.choice<U>(prevList);
+      if (afterList.includes(choose)) {
+        // if include skip --> don't do anything, and go to head.
+        continue;
+      } else {
+        // if passed add.
+        afterList = [...afterList, choose];
+      }
     }
-  }
-  return rands;
-};
 
-const randomString = (letterPiece: number) => {
-  const alphabetsAndNumsAndSymbols: string[] = [
-    ..."abcdefghijklmnopqrstuvwxyz",
-    ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    ..."1234567890",
-    ..."!#$%&'()=~|-^+*;:{}[]?<>,._"
-  ];
-
-  let text: string = "";
-  for (let i = 0; i < letterPiece; i++) {
-    text += randomChoice(alphabetsAndNumsAndSymbols);
+    return afterList;
   }
 
-  return text;
-};
+  static pluralInts(min: number, max: number, piece: number) {
+    let rands: number[] = [];
+    for (let times = 0; times < piece; times++) {
+      rands = [...rands, this.integer(min, max)];
+    }
+    return rands;
+  }
 
-module.exports = {
-  rangeRandom,
-  rangeRandoms,
-  rangeRandomsNoRepeat,
-  replacement,
-  randomChoice,
-  randomString
-};
+  static pluralIntsNoRepeat(min: number, max: number, piece: number) {
+    if (max - min < piece) {
+      throw new Error("Value Error! max-min < piece => I must be repeat!!");
+    }
+
+    let rands: number[] = [];
+
+    while (rands.length !== piece) {
+      let rand = this.integer(min, max);
+      if (rands.includes(rand)) {
+        continue;
+      } else {
+        rands = [...rands, rand];
+      }
+    }
+    return rands;
+  }
+}
+
+module.exports = Random;
